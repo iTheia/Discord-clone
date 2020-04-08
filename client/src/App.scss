@@ -1,0 +1,10 @@
+@import './styles/Colors.scss';
+@import './styles/General.scss';
+@import './styles/Landing.scss';
+@import './styles/Login.scss';
+
+.align{
+    &__left{
+        text-align: left;
+    }
+}
