@@ -9,12 +9,32 @@ body{
     background:$grey;
     color: $white;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 a{
     text-decoration: none;
     color: inherit;
 }
+$desktop: 980px;
+$tablet: 979px; 
 
+@mixin desktop{
+    @media (min-width: #{$desktop}){
+        @content;
+    }
+
+}
+@mixin tablet{
+    @media (min-width: 500px) and (max-width: #{$tablet}){
+        @content;
+    }
+
+}
+
+.scroll { 
+    overflow-y : auto;
+    overflow-x : auto;
+} 
 .container{
     padding: 10px 5%;
 }
@@ -36,18 +56,25 @@ a{
 }
 .fancy__button{
     font-size:1rem;
-    margin: 10px;
     padding: 6px 10px;
-    width:250px;
     background: $blue;
     border:none;
     color: white;
     border-radius: 3px ;
+    width: 250px;
+    margin: 10px;
     &__alternative{
         @extend .fancy__button;
         color: $grey;
         background: $white;
         
+    }
+    &__active{
+        @extend .fancy__button;
+        margin: 0;
+        width: 100%;
+        color: $white;
+        background: $green;
     }
     &__login{
         @extend .fancy__button;
@@ -58,6 +85,9 @@ a{
 
 .highlight{
     color: $blue;
+    &__purple{
+        color: #9147ff;
+    }
 }
 .margin{
     $margin: var(--margin);
@@ -79,6 +109,25 @@ a{
         font-size: 1.4rem;
     }
 }
-.left{
-    text-align: left;
+.burger{
+    display: flex;
+    position: relative;
+    z-index: 3;
+    justify-content: center;
+    flex-direction: column;
+    width: 30px;
+    cursor: pointer;
+    @include desktop{
+        display: none;
+    }
+    .line{
+        background: white;
+        height: 3px;
+        margin: 2px 0px;
+        width: 100%;
+
+    }
+}
+.logout{
+    color: rgb(204, 0, 0);
 }

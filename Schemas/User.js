@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+
 const schema = new Schema({
     name:{
         type:String,
@@ -19,12 +20,13 @@ const schema = new Schema({
         max:1024
     },
     friends:{
-        type:Array,
-        default:[]
+        type:Array
     },
-    joinedServers:{
-        type:Array,
-        default:[]
+    serverList:{
+        type:Array
+    },
+    pendingRequest:{
+        type:Array
     },
     date:{
         type:Date,

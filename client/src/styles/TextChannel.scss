@@ -1,0 +1,77 @@
+.text-channel{
+    height: 95vh;
+    padding: 0 2rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    position: relative;
+    @include desktop{
+        width: calc(100% - 200px);
+    }
+    &__container{
+        width: 100%;
+        padding: 1rem 1rem .5rem 0;
+        height: 90%;
+        font-size: .8rem;
+
+        
+    }
+    &__data{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+    &__title{
+        width: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    &__content{
+        width: 100%;
+        overflow-x: auto;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    .fancy__input{
+        position: relative;
+        bottom: 0;
+        left: 0;
+        margin-top: 10px;
+    }
+    &__message{
+        margin: 20px 0;
+        &__title{
+            font-size: 1rem;
+            color: $blue;
+            margin-right: 10px;
+            float: left;
+        }
+        &__body{
+            font-size: .9rem;
+        }
+    }
+    
+}
+.friend-list{
+    position: absolute;
+    top: 0;
+    right: -100vw ;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #2f3136;
+    transition: .5s ease-out;
+    @include desktop{
+        right: 0;
+    }
+    .friend{
+        margin: 10px 0;
+        display: flex;
+    }
+    &__active{
+        right: 0;
+    }
+}

@@ -1,17 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useHistory, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../actions'
 const URI = 'http://localhost:5000/api/v1/acess'
 
 export default function Register() {
     
     const history = useHistory()
+    const dispatch = useDispatch()
+    const token = useSelector(state => state.isLogged)
 
     const [user, setUser] = useState({
-        name:'marlon',
-        password:'brandon',
-        email:'test@test2341.com'
+        name:'iTheia',
+        password:'manga123',
+        email:'martinez.1ded@gmail.com'
     })
+
+    useEffect(() => {
+        if(token !== ''){
+            history.push('/home')
+        }
+
+        return () => {
+            
+        }
+    }, [])
 
     const submit = async e =>{
         e.preventDefault()
@@ -19,12 +33,10 @@ export default function Register() {
         const copy = user
         try {
             const response  = await axios.post(url, copy)
-            if(response.status === 200){
-                localStorage.setItem('auth-token', response.data)
-                history.push('/home')
-            }
+            dispatch(login(response.data))
+            history.push('/home/me')
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
         
     }
@@ -46,11 +58,11 @@ export default function Register() {
                     </div>
                     <div className="margin__bottom" style={{'--margin':'20px'}}>
                         <label htmlFor="user">USER NAME</label>
-                        <input className="fancy__input" name="user" onChange={handleChange} type="text"/>
+                        <input className="fancy__input" name="name" onChange={handleChange} type="text"/>
                     </div>
                     <div className="margin__bottom" style={{'--margin':'20px'}}>
                         <label htmlFor="password">PASSWORD</label>
-                        <input className="fancy__input" name="password" onChange={handleChange} type="text"/>
+                        <input className="fancy__input" name="password" onChange={handleChange} type="password"/>
                     </div>
                     <button className="fancy__button__login margin__top" style={{'--margin':'8px'}} onClick={submit}>Register</button>
                 </form>

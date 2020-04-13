@@ -3,7 +3,8 @@ import './App.scss'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom"
 import HomeRoute from './modules/HomeRoute'
 import Landing from './containers/Landing'

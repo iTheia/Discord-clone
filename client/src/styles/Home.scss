@@ -1,0 +1,197 @@
+.home-container{
+    position: relative;
+    overflow: hidden;
+    .server-list{
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        align-items:center ;
+        background: $black;
+        overflow-x: auto;
+        max-height: 100vh;
+        .server{
+            border: none;
+            overflow: hidden;
+            position: relative;
+            border-radius: 50%;
+            min-width: 50px;
+            min-height: 50px;
+            margin-top: 9px;
+            background: rgb(238, 234, 234);
+            transition: .2s ease;
+            &:hover{
+                border-radius: 8px;
+            }
+            &__add{
+                @extend .server;
+                background: $darkgrey;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.6rem;
+                color: $green;
+            }
+        }
+    }
+    
+    @include desktop{
+        display: grid;
+    }
+    .right-panel{
+        position: relative;
+        z-index: 2;   
+        width: calc(100%);
+        left: 0;
+        height: 100vh;
+        @include desktop{
+            width: calc(100% - 300px);
+            left: 300px;
+        }
+        h1{
+            text-align:center; 
+            align-items:center;
+            margin:10px;
+        }
+    }
+    .left-panel{
+        width: var(--width);
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        left: -100vw;
+        min-height: 100vh;
+        display: flex;
+        transition: .5s ease-out;
+        @include desktop{
+            left: 0;
+        }
+        &__active{
+            left: 0;
+        }
+        .secundary-panel{
+            padding: 20px 1rem;
+            background:#2f3136;
+            width: calc(var(--width) - 70px);
+        }
+        .server-panel{
+            &__title{
+                display: flex;
+                justify-content: space-between;
+                padding: 5px 10px;
+                height: 40px;
+                width: 200px;
+                font-size: 1.2rem;
+            }
+        }
+    }
+    .menu{
+        width: 300px;
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        right: -100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        justify-content: space-around;
+        transition:  .5s ease-in-out;
+        @include desktop{
+            right: 0;
+            height: 30px;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 14px;
+            width: 30%;
+            padding: 0;
+        }
+        a{
+            border-bottom: 2px solid $blue;
+        }
+        &__active{
+            right: 0vw;
+        }
+    }
+    .friendList{
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;;
+        overflow-x: hidden;
+        height: 100vh;
+        .friend{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items:center ;
+            margin-top: 7px;
+            padding: 7px;
+            border-radius: 8px;
+            &:hover{
+                background: #36393f;
+            }
+            
+        }
+    }
+}
+.friend-icon{
+    margin-right: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.top-slide{
+    position: relative;
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    background: #2f3136;
+    @include desktop{
+        justify-content: center;
+    }
+}
+.games{
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fit,minmax(140px, 1fr));
+}
+.log-out{
+    border: none;
+    color: $white;
+    padding: 3px 9px;
+    background: rgb(170, 5, 27);
+}
+
+.homeIcon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 130%;
+    max-height: 130%;
+}
+.request-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+    grid-template-rows: repeat(auto-fit, minmax(80px, 100px));
+    padding-top: 1rem;
+    justify-content: center;
+    height: 100vh;
+    grid-gap: 1rem;
+    .request{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 40px;
+        border-bottom: 1px solid $grey;
+        &__name{
+            font-size: 1.2rem;
+        }
+        &__icon{
+            width: 30px;
+        }
+    }
+}

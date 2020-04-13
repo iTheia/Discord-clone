@@ -5,31 +5,35 @@ import iphone from '../src/iphone.svg'
 import phone from '../src/phone.svg'
 import desktop from '../src/desktop.svg'
 import laptop from '../src/laptop.svg'
-import cube from '../src/cube.svg'
+/* import cube from '../src/cube.svg'
 import bomb from '../src/bomb.svg'
 import coin from '../src/coin.svg'
 import triangle from '../src/triangle.svg'
 import controller from '../src/controller.svg'
 import circle from '../src/circle.svg'
-import box from '../src/box.svg'
+import box from '../src/box.svg' */
 import { Link } from 'react-router-dom'
 
-export default function Home() {
-    localStorage.removeItem('auth-token')
+export default function Home(props) {
+    if(props.location.from){
+        alert('You Must login')
+    }
     return (
+
         <div className="landing-page">
             <Header />
             <div className="home container">
                 <h1>A new way to chat with your communities and friends.</h1>
                 <p>Discord is the easiest way to communicate over voice, video, and text, whether you’re part of a school club, a nightly gaming group, a worldwide art community, or just a handful of friends that want to hang out.</p>
-                <button className="fancy__button__alternative">Download for windows</button>
-                <Link className="fancy__button" to="/home">Open App in the browser </Link>
+                <div className="buttons">
+                    <button className="fancy__button__alternative">Download for windows</button>
+                    <Link className="fancy__button" to="/home">Open App in the browser </Link>
+                </div>
                 <div className="content">
                     <img className="desktop" src={desktop} alt=""/>
                     <img className="iphone" src={iphone} alt=""/>
                     <img className="phone" src={phone} alt=""/>
                     <img className="laptop" src={laptop} alt=""/>
-                    <img className="controller" src={controller} alt=""/>
                 </div>
             </div>
             <div className="about container">
@@ -44,9 +48,6 @@ export default function Home() {
                         This app is made using <span className="highlight">React MongoDb Express NodeJs</span>
                     </p>
                 </div>
-            </div>
-            <div className="developer container">
-                
             </div>
             <Footer/>
         </div>

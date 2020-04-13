@@ -1,24 +1,39 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useHistory, Link } from 'react-router-dom'
-const URI = 'http://localhost:5000/api/v1/acess'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../actions'
+
 
 export default function Login() {
+
     const history = useHistory()
+    const dispatch = useDispatch()
+    const token = useSelector(state => state.isLogged)
 
     const [user, setUser] = useState({
-        password:'',
-        email:''
+        password:'manga123',
+        email:'martinez.1ded@gmail.com'
     })
+
+    useEffect(() => {
+        if(token !== ''){
+            history.push('/home')
+        }
+        return () => {
+            
+        }
+    }, [])
 
     const submit = async e =>{
         e.preventDefault()
-        const url = `${URI}/login`
         const copy = user
-        const response  = await axios.post(url, copy)
-        if(response.status === 200){
-            localStorage.setItem('auth-token', response.data)
+        try {
+            const response  = await axios.post('http://localhost:5000/api/v1/acess/login', copy)
+            dispatch(login(response.data))
             history.push('/home')
+        } catch (error) {
+            console.log(error)
         }
     }
     const handleChange = e =>{
@@ -26,13 +41,14 @@ export default function Login() {
         copy[e.target.name] = e.target.value
         setUser(copy)
     }
+    
 
     return (
         <div className="login login-component">
             <div className="content">
                 <Link to="/"><img className="logo" src={require('../src/logo.png')} alt=""/></Link>
                 <h1>¡Hello again!</h1>
-                <p>we are very happy to see you again</p>
+                <p>we are very happy to see you again </p>
                 <form autoComplete="off">
                     <div className="margin__bottom" style={{'--margin':'20px'}}>
                         <label className="opaccity" htmlFor="email">EMAIL</label>
@@ -40,7 +56,7 @@ export default function Login() {
                     </div>
                     <div className="margin__bottom" style={{'--margin':'20px'}}>
                         <label className="opaccity" htmlFor="password">PASSWORD</label>
-                        <input className="fancy__input" name="password" onChange={handleChange} type="text"/>
+                        <input className="fancy__input" name="password" onChange={handleChange} type="password"/>
                     </div>
                     <button className="fancy__button__login margin__top" style={{'--margin':'8px'}} onClick={submit}>Login</button>
                 </form>
