@@ -10,7 +10,9 @@ const disableActive = (state = function () {}, action ) =>{
         const left = document.querySelector(`.${leftPannel}`)
         left.classList.remove(`${leftPannel}__active`)
         const right = document.querySelector(`.${rightPannel}`)
-        right.classList.remove(`${rightPannel}__active`)
+        if(right){
+            right.classList.remove(`${rightPannel}__active`)
+        }
     }
 }
 

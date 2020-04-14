@@ -13,6 +13,7 @@ export default function TextChannel({match}) {
 
     const disableActive = useSelector(state => state.disableActive)
     useEffect(() => {
+
         socket = io(URI)
         const room = match.params.id
         socket.emit('join', {room, name:user.name}, () =>{
@@ -38,13 +39,9 @@ export default function TextChannel({match}) {
 
     return (
         <div className="text-channel" onClick={() =>{
-            if(match.params.friend){
                 disableActive('left-panel', 'menu')
-            }else{
                 disableActive('left-panel', 'friend-list')
-            }
         }}>
-            <button onClick={() =>console.log(messages)}> See messages</button>
             <div className="text-channel__title">
                 <img src={require('../src/numeral.png')} alt=""/>
                 TITLE

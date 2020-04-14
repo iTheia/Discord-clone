@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {UserModel}= require('../Schemas/User')
 const verifycation = require('./verifyToken')
-
+const { TextChannelModel } = require('../Schemas/TextChannel')
 
 router.post('/', verifycation, async (req,res)=>{
     const user_id =  req.user
@@ -18,7 +18,7 @@ router.post('/', verifycation, async (req,res)=>{
     let alredySended = friend.pendingRequest.find(friend =>friend._id == user_id._id)
 
     if(alredySended){
-        return res.send({alredySended:'you alredy send a friend request'})
+        return res.status(400).send({alredySended:'you alredy send a friend request'})
     }
     friend.pendingRequest.push({_id:user._id, name:user.name})
 
@@ -64,10 +64,15 @@ router.get('/:id', verifycation, async (req,res)=>{
             user.pendingRequest.splice(index, 1)
         }
     } 
-
+    const channel = new TextChannelModel({
+        name: ' ',
+        messages: []
+    })
+    await channel.save()
     user.friends.push({
         _id:friend._id,
-        name:friend.name
+        name:friend.name,
+        slug: channel._id
     })
 
     await UserModel.findByIdAndUpdate(user._id, {
@@ -76,7 +81,8 @@ router.get('/:id', verifycation, async (req,res)=>{
     })
     friend.friends.push({
         _id:user._id,
-        name:user.name
+        name:user.name,
+        slug: channel._id
     })
 
     await UserModel.findByIdAndUpdate(friend._id, {

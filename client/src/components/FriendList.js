@@ -29,7 +29,7 @@ export default function FriendList({items, url}) {
             {
                 items.map(item =>{
                     return (
-                        <Link to={`${url}/${item._id}`} className="friend" key={item._id}>
+                        <Link to={`${url}/${item.slug}`} className="friend" key={item._id}>
                             <img className="icon" src="" alt=""/><span>{item.name}</span>
                         </Link>
                     )

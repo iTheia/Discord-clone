@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const {UserSchema} =require('./User')
 const {ResumedUserSchema} =require('./ResumedUser')
-const {TextChannelSchema} =require('./TextChannel')
 
 const schema = new Schema({
     owner:ResumedUserSchema,
@@ -12,7 +10,12 @@ const schema = new Schema({
         min:6,
         max:255
     },
-    textChannels:[TextChannelSchema],
+    textChannels:{
+        type:Array
+    },
+    voiceChannels:{
+        type:Array
+    },
     users:[ResumedUserSchema],
     date:{
         type:Date,
